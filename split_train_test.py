@@ -21,14 +21,14 @@ stop = 1
 
 def splitter(classname, picname, size):
 
-    directory_pre = "/home/astar/Desktop/DL_Images_1/"
-    directory_train = "/home/astar/Desktop/DL_Images/training_set/"
-    directory_test = "/home/astar/Desktop/DL_Images/test_set/"
+    directory_pre = "/home/astar/Desktop/DL_Images_320/"
+    directory_train = "/home/astar/Desktop/DL_Images_New/training_set/"
+    directory_test = "/home/astar/Desktop/DL_Images_New/test_set/"
 
     j = 1
     k = 1
 
-    """with open('/home/astar/Desktop/smaller_images/Joystick.csv', 'r') as f:
+    """with open('/home/astar/Desktop/smallish_images/Joystick.csv', 'r') as f:
         reader = csv.reader(f)
         your_list = list(reader)
         print (your_list)

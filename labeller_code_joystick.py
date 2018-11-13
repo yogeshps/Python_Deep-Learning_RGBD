@@ -2,12 +2,12 @@ from keras.preprocessing.image import img_to_array, load_img
 from PIL import Image
 import csv
 
-directory_pre = "/home/astar/Desktop/smaller_images/smalldepth_"
+directory_pre = "/home/astar/Desktop/smallish_images/smalldepth_"
 
-directory_left = "/home/astar/Desktop/DL_Images_1/LEFT/left_"
-directory_right = "/home/astar/Desktop/DL_Images_1/RIGHT/right_"
-directory_forward = "/home/astar/Desktop/DL_Images_1/FORWARD/forward_"
-directory_stop = "/home/astar/Desktop/DL_Images_1/STOP/stop_"
+directory_left = "/home/astar/Desktop/DL_Images_320/LEFT/left_"
+directory_right = "/home/astar/Desktop/DL_Images_320/RIGHT/right_"
+directory_forward = "/home/astar/Desktop/DL_Images_320/FORWARD/forward_"
+directory_stop = "/home/astar/Desktop/DL_Images_320/STOP/stop_"
 
 img_type = ".jpg"
 img_type_orig = ".jpg"
@@ -17,7 +17,7 @@ forward = 1
 right = 1
 stop = 1
 
-with open('/home/astar/Desktop/smaller_images/Joystick.csv', 'r') as f:
+with open('/home/astar/Desktop/smallish_images/Joystick.csv', 'r') as f:
     reader = csv.reader(f)
     your_list = list(reader)
     print (your_list)

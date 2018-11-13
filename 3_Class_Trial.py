@@ -22,7 +22,6 @@ classifier.add(Flatten())
 classifier.add(Dense(units = 128, activation = 'relu'))
 classifier.add(Dense(units = 1, activation = 'sigmoid'))
 # Compiling the CNN
-classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 # Part 2 - Fitting the CNN to the images
 train_datagen = ImageDataGenerator(rescale = 1./255)
