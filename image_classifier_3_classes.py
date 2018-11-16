@@ -36,14 +36,14 @@ def plots1(ims, figsize=(16,6), rows=2, titles=None):
 
 # Set directories for image flow
 
-train_path = '/home/astar/Desktop/DL_Images_New/training_set'
-test_path = '/home/astar/Desktop/DL_Images_New/test_set'
-valid_path = '/home/astar/Desktop/DL_Images_New/validation_set'
+train_path = '/home/astar/Desktop/DL_Stuff/DL_Final/training_set'
+test_path = '/home/astar/Desktop/DL_Stuff/DL_Final/test_set'
+valid_path = '/home/astar/Desktop/DL_Stuff/DL_Final/validation_set'
 
 classifier = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(120, 320, 3)),
+    Conv2D(32, (3, 3), activation='relu', input_shape=(160, 427, 3)),
     Flatten(),
-    Dense(3, activation='softmax'),
+    Dense(4, activation='softmax'),
 ])
 
 classifier.compile(Adam(lr=0.0001), loss = 'categorical_crossentropy', metrics = ['accuracy'])
@@ -56,21 +56,21 @@ valid_datagen = ImageDataGenerator(rescale = 1./255)
 # Start image flow from directory and set classes for one-hot encoding
 # class_mode is set to categorical as default so we do not have to mention it here
 
-train_batches = train_datagen.flow_from_directory(train_path, target_size =(120, 320),
-                                                  classes=['FORWARD', 'LEFT', 'STOP'], batch_size=10)
-test_batches = test_datagen.flow_from_directory(test_path, target_size =(120, 320),
-                                                classes=['FORWARD', 'LEFT', 'STOP'], batch_size=10)
-valid_batches = valid_datagen.flow_from_directory(valid_path, target_size =(120, 320),
-                                                  classes=['FORWARD', 'LEFT', 'STOP'], batch_size=10)
+train_batches = train_datagen.flow_from_directory(train_path, target_size =(160, 427),
+                                                  classes=['FORWARD', 'LEFT', 'RIGHT', 'STOP'], batch_size=10)
+test_batches = test_datagen.flow_from_directory(test_path, target_size =(160, 427),
+                                                classes=['FORWARD', 'LEFT', 'RIGHT', 'STOP'], batch_size=10)
+valid_batches = valid_datagen.flow_from_directory(valid_path, target_size =(160, 427),
+                                                  classes=['FORWARD', 'LEFT', 'RIGHT', 'STOP'], batch_size=10)
 
 # Code snippet to print one hot encoded labels
 
 imgs, labels = next(train_batches)
 #plots1(imgs, titles=labels)
 
-classifier.fit_generator(train_batches, steps_per_epoch = 214, epochs = 15, validation_data = test_batches, validation_steps = 54, verbose=1)
+classifier.fit_generator(train_batches, steps_per_epoch = 186, epochs = 25, validation_data = test_batches, validation_steps = 48, verbose=1)
 
-model_path='/home/astar/Desktop/DL_Images_New/my_model.h5'
+model_path='/home/astar/Desktop/DL_Stuff/DL_Final/my_model.h5'
 classifier.save(model_path)  # creates a HDF5 file 'my_model.h5'
 
 #Test with new image
@@ -89,9 +89,9 @@ else:
     prediction = 'stop'
 print (prediction)"""
 
-model_path='/home/astar/Desktop/DL_Images_New/my_model.h5'
+model_path='/home/astar/Desktop/DL_Stuff/DL_Final/my_model.h5'
 model = load_model(model_path)
-test_image = image.load_img('/home/astar/Desktop/DL_Images_New/validation_set/FORWARD/forward_5.jpg', target_size = (120, 320))
+test_image = image.load_img('/home/astar/Desktop/DL_Stuff/DL_Final/validation_set/FORWARD/forward_536.jpg', target_size = (160, 427))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = model.predict(test_image)
@@ -101,6 +101,8 @@ if result[0][0] == 1:
     prediction = 'forward'
 elif result[0][1] == 1:
     prediction = 'left'
+elif result[0][2] == 1:
+    prediction = 'right'
 else:
     prediction = 'stop'
 print (prediction)
